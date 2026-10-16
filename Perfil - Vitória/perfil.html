@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- FONTES -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap"
+        rel="stylesheet">
+
+    <!-- ÍCONES -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <title>Perfil</title>
+
+    <style>
+        :root {
+            --fundo: #002333;
+            --fundo-claro: #e6eef4;
+            --texto: #dedada;
+            --texto-claro: #1f1f1f;
+            --detalhe: #7dcceb;
+            --card: #00253a;
+            --card-claro: #ffffff;
+        }
+
+        body.light {
+            --fundo: var(--fundo-claro);
+            --texto: var(--texto-claro);
+            --card: var(--card-claro);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Playfair Display", serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: linear-gradient(to bottom, #02456e, var(--fundo));
+            color: var(--texto);
+        }
+
+        #temaBtn {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            padding: 12px 16px;
+            font-size: 20px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            background: var(--detalhe);
+            color: #002333;
+            transition: 0.3s;
+        }
+
+        #temaBtn:hover {
+            transform: scale(1.1);
+        }
+
+        nav {
+            width: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 15px 0;
+            backdrop-filter: blur(5px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 999;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            list-style: none;
+        }
+
+        nav ul li a {
+            color: var(--detalhe);
+            text-decoration: none;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: white;
+            transform: scale(1.1);
+        }
+
+        .container {
+            display: flex;
+            align-items: center;
+            flex-direction: column;
+            padding-top: 120px;
+            padding-bottom: 50px;
+        }
+
+        .perfil {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: var(--detalhe) 5px solid;
+            margin: 16px 0;
+            animation: popUp 1.2s;
+    
+        }
+
+        #depoimento {
+            background-color: #003249;
+            padding: 12px 20px;
+            border-radius: 12px;
+            border: 1px solid var(--detalhe);
+            text-align: center;
+            max-width: 700px;
+            margin-bottom: 20px;
+        }
+
+        .quadro {
+            width: 90%;
+            max-width: 900px;
+            background: var(--card);
+            border: 2px solid #194475;
+            border-radius: 15px;
+            box-shadow: 0 0 12px rgba(0, 0, 0, 0.35);
+            padding: 25px;
+            margin-top: 40px;
+            cursor: pointer;
+            transition: 0.35s;
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .quadro.mostrar {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .quadro:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 0 20px var(--detalhe);
+        }
+
+        .titulo-quadro {
+            font-size: 24px;
+            color: var(--detalhe);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .linha {
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, transparent, var(--detalhe), transparent);
+            border-radius: 10px;
+            margin: 12px 0 18px 0;
+        }
+
+        .quadro p {
+            font-size: 17px;
+            line-height: 1.7;
+            text-align: center; /* centralizado */
+        }
+
+        footer {
+            padding: 20px;
+            background: #001e2d;
+            color: var(--detalhe);
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        @keyframes popUp {
+            from {
+                opacity: 0;
+                transform: scale(0.7);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        /* GRID DOS INTERESSES */
+        .interesses-grid {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+
+        /* CARD INDIVIDUAL */
+        .interesse-item {
+            background: var(--card);
+            border: 1px solid #194475;
+            border-radius: 12px;
+            width: 230px;
+            padding: 20px;
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .interesse-item:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 12px var(--detalhe);
+        }
+
+        /* IMAGENS */
+        .interesse-item img {
+            width: 120px;
+            margin-bottom: 12px;
+        }
+
+        /* TÍTULOS */
+        .interesse-item h3 {
+            font-size: 20px;
+            color: var(--detalhe);
+            margin-top: 10px;
+            text-align: center;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="#">Início</a></li>
+            <li><a href="#">Perfil</a></li>
+            <li><a href="#">Curso</a></li>
+        </ul>
+    </nav>
+
+    <button id="temaBtn"><i class="fas fa-moon"></i></button>
+
+    <section class="container">
+
+        <h1>Desenvolvimento de Sistemas</h1>
+
+        <p id="depoimento">"Na programação, desordem é apenas lógica esperando para ser descoberta."</p>
+
+        <div class="perfil">
+            <img src="C:\Users\Cliente\Pictures\Screenshots\Captura de tela 2025-11-24 103844.png" width="70%" height="70%">
+        </div>
+
+        <h2 id="h2Perfil">Vitória de Sousa</h2>
+
+        <!-- QUADRO 1 -->
+        <div class="quadro">
+            <h2 class="titulo-quadro"><i class="fas fa-code"></i> Sobre o Curso</h2>
+            <div class="linha"></div>
+            <p>
+                O curso de Desenvolvimento de Sistemas ensina você a transformar ideias em tecnologia, criando sites, aplicativos e soluções reais. É motivador porque cada desafio vira aprendizado, cada projeto mostra seu progresso e cada novo conhecimento abre portas no mercado. Se você gosta de lógica, criatividade e inovação, esse curso é o caminho para construir o futuro com suas próprias mãos.
+            </p>
+        </div>
+
+        <!-- QUADRO 2 - Meus Projetos -->
+        <div class="quadro">
+            <h2 class="titulo-quadro"><i class="fas fa-lightbulb"></i> Meus Projetos</h2>
+            <div class="linha"></div>
+
+            <!-- PEQUENO QUADRO 1 -->
+            <div class="quadro">
+                <h2 class="titulo-quadro"><i class="fas fa-folder-open"></i> Projeto 1</h2>
+                <div class="linha"></div>
+                <img src="C:\Users\Cliente\Downloads\16DNZf.png" style="width:200px; border-radius:10px; margin-bottom:10px;">
+                <img src="https://i.scdn.co/image/ab67616d0000b2732ef73259916f5559222fc62a" style="width:200px; border-radius:10px; margin-bottom:10px;">
+                <p>A história da banda Charlie Brown Jr. é marcada por um vocalista icônico, Chorão, cujo nome verdadeiro era Alexandre Magno Abrão. Chorão, conhecido por seu carisma e talento, foi um dos fundadores da banda e se tornou uma figura central na carreira musical da banda. Ele começou sua carreira de forma inusitada, cantando em um bar de Santos, e rapidamente se destacou como vocalista da banda What’s Up, que mais tarde se transformaria no Charlie Brown Jr. Chorão era um compositor habilidoso, e suas músicas refletiam suas experiências, emoções e visões de mundo. Algumas das composições mais marcantes incluem "Proibida Pra Mim (Grazon)" e "Lugar ao Sol". A banda, que misturava rock, reggae, rap e hardcore, conquistou o Brasil com seu som único e mesclado..</p>
+                <a href="https://keen-mousse-5e78a8.netlify.app" style="color: var(--detalhe);">🔗 Charlie Brown Jr</a>
+            </div>
+
+            <!-- PEQUENO QUADRO 2 -->
+            <div class="quadro">
+                <h2 class="titulo-quadro"><i class="fas fa-folder-open"></i> Projeto 2</h2>
+                <div class="linha"></div>
+                <img src="C:\Users\Cliente\Downloads\TUY7qz.png" style="width:200px; border-radius:10px; margin-bottom:10px;">
+               <img src="https://m.media-amazon.com/images/I/61F6T1at-nL.jpg" style="width:200px; height: 200px; ; border-radius:10px; margin-bottom:10px;">
+                <p> um livro que nos convida a desacelerar para enxergar a vida com mais ternura e clareza. Haemin Sunim mostra, com palavras simples e acolhedoras, que quando diminuímos o ritmo conseguimos ouvir melhor nossos próprios sentimentos, lidar com as dificuldades com mais leveza e perceber a beleza escondida nas pequenas coisas. A obra nos lembra de cuidar de nós mesmos, aceitar nossas imperfeições e encontrar paz na presença, não na pressa. É uma leitura que acalma, acolhe e nos devolve ao essencial.</p>
+                <a href="https://beamish-croquembouche-b36c82.netlify.app" style="color: var(--detalhe);">🔗 As Coisas Que você Só Vê Quando Desacelera</a>
+            </div>
+
+            <!-- PEQUENO QUADRO 3 -->
+            <div class="quadro">
+                <h2 class="titulo-quadro"><i class="fas fa-folder-open"></i> Projeto 3</h2>
+                <div class="linha"></div>
+                <img src="C:\Users\Cliente\Downloads\37ro0t.png" style="width: 200px;; border-radius:10px; margin-bottom:10px;">
+               <img src="https://i.pinimg.com/736x/fb/42/c9/fb42c954e9d188ef334e51f5be6caaeb.jpg" style="width: 200px;; border-radius:10px; margin-bottom:10px;">
+                <p>Rapunzel (Enrolados) conta a história de uma jovem com cabelos mágicos que vive presa em uma torre pela Mãe Gothel. Quando conhece o ladrão Flynn Rider, ela finalmente sai para o mundo e embarca em uma aventura de descobertas, liberdade e amor. É uma animação leve e divertida sobre coragem e encontrar o próprio caminho.</p>
+                <a href="https://zingy-kringle-74e001.netlify.app/" style="color: var(--detalhe);">🔗 Rapunzel</a>
+            </div>
+
+              <div class="quadro">
+                <h2 class="titulo-quadro"><i class="fas fa-folder-open"></i> Projeto 4</h2>
+                <div class="linha"></div>
+                <img src="C:\Users\Cliente\Downloads\dNr9M3.png" style="width: 200px;; border-radius:10px; margin-bottom:10px;">
+               <img src="https://i.pinimg.com/736x/f6/bc/af/f6bcaf7320a1ec8144ad77c4270ce969.jpg" style="width:200px;;height: 200px; border-radius:10px; margin-bottom:10px;">
+                <p>A Música Popular Brasileira, carinhosamente conhecida como MPB, é um dos gêneros musicais mais ricos e influentes do mundo. Com uma história que abrange décadas e uma diversidade impressionante de estilos e influências, a MPB cativa ouvintes em todo o mundo com sua riqueza lírica, melódica e cultural.</p>
+                <a href="file:///C:/Users/Cliente/Desktop/Perfil%20-%20Vit%C3%B3ria/index.html" style="color: var(--detalhe);">🔗 MPB</a>
+            </div>
+
+        </div>
+
+        <!-- QUADRO 3 - NOVO COM 3 FOTOS E 3 TITULOS -->
+        <div class="quadro mostrar">
+            <h2 class="titulo-quadro"><i class="fas fa-images"></i></h2>
+            <div class="linha"></div>
+
+            <div class="interesses-grid">
+
+                <!-- ITEM 1 -->
+                <div class="interesse-item">
+                    <img src="https://i.scdn.co/image/ab67616d0000b2732ef73259916f5559222fc62a">
+                    <h3>Charlie Brown Jr</h3>
+                </div>
+
+                <!-- ITEM 2 -->
+                <div class="interesse-item">
+                    <img src="https://m.media-amazon.com/images/I/61F6T1at-nL.jpg">
+                    <h3>Livro</h3>
+                </div>
+
+                <!-- ITEM 3 -->
+                <div class="interesse-item">
+                    <img src="https://i.pinimg.com/736x/fb/42/c9/fb42c954e9d188ef334e51f5be6caaeb.jpg">
+                    <h3>Rapunzel</h3>
+                </div>
+
+                  <!-- ITEM 3 -->
+                <div class="interesse-item">
+                    <img src="https://s2-g1.glbimg.com/hRouMmcG-zWOdJoz0BQelDMRqHs=/0x0:997x631/924x0/smart/filters:strip_icc()/i.s3.glbimg.com/v1/AUTH_59edd422c0c84a879bd37670ae4f538a/internal_photos/bs/2021/N/N/WkjS7HQjWrVYSXfmmGiw/phono73capa1.jpg">
+            
+                    <h3>MPB</h3>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- QUADRO 4 -->
+        <div class="quadro">
+            <h2 class="titulo-quadro"><i class="fas fa-bullseye"></i> Supervisor - Sávio Mendes.</h2>
+            <div class="linha"></div>
+            <img src="C:\Users\Cliente\Pictures\Screenshots\Captura de tela 2025-11-19 091322.png" style="width:200px; border-radius:10px; margin-bottom:10px;"> 
+            <p>
+               Meu professor de Desenvolvimento de Sistemas é alguém claro, paciente e apaixonado por tecnologia. Ele explica conceitos complexos de um jeito simples, sempre conectando teoria à prática. Incentiva os alunos a pensar, criar e resolver problemas, oferecendo apoio quando surgem dificuldades. Sua didática eficiente e seu entusiasmo fazem com que a aprendizagem se torne leve, motivadora e realmente transformadora.
+            </p>
+        </div>
+
+    </section>
+
+    <footer>© 2025 — Desenvolvido por Vitória de Sousa</footer>
+
+    <script>
+        const temaBtn = document.getElementById("temaBtn");
+        temaBtn.addEventListener("click", () => {
+            document.body.classList.toggle("light");
+            temaBtn.innerHTML = document.body.classList.contains("light")
+                ? '<i class="fas fa-sun"></i>'
+                : '<i class="fas fa-moon"></i>';
+        });
+
+        const quadros = document.querySelectorAll(".quadro");
+
+        function aparecerCards() {
+            quadros.forEach(q => {
+                const posicao = q.getBoundingClientRect().top;
+                if (posicao < window.innerHeight - 80) {
+                    q.classList.add("mostrar");
+                }
+            });
+        }
+
+        window.addEventListener("scroll", aparecerCards);
+        aparecerCards();
+    </script>
+
+</body>
+
+</html>
